@@ -1,0 +1,131 @@
+ <div class="students-entry">
+    <ng-template #studentsForm let-modal>
+        <form class="students-entry-form">
+            <div class="students-entry-form__form-row">
+                Full Name
+                <div class="students-entry-form__form-row--input-section">
+                    <span class="form-group">
+                        <label for="inputName">Name</label>
+                        <input id="inputName" [formControl]="nameControl" type="text" class="form-control" placeholder="First Name">
+                    </span>
+                </div>
+            </div>
+            <div class="students-entry-form__form-row">
+                Origin
+                <div class="students-entry-form__form-row--input-section">
+                    <span class="form-group">
+                        <label for="inputName">Country</label>
+                        <input id="inputName" [formControl]="countryControl" type="text" class="form-control" placeholder="First Name">
+                    </span>
+                    <span class="form-group">
+                        <label for="inputName">State</label>
+                        <input id="inputName" [formControl]="stateControl" type="text" class="form-control" placeholder="First Name">
+                    </span>
+                </div>
+            </div>
+            <div class="students-entry-form__form-row">
+                Declaration
+                <div class="students-entry-form__form-row--input-section">
+                    <span class="form-group">
+                        <label for="inputName">Passport Declaration</label>
+                        <input id="inputName" [formControl]="passportDeclarationControl" type="text" class="form-control" placeholder="First Name">
+                    </span>
+                    <span class="form-group">
+                        <label for="inputName">Fitness Declaration</label>
+                        <input id="inputName" [formControl]="fitnessDeclarationControl" type="text" class="form-control" placeholder="First Name">
+                    </span>
+                </div>
+            </div>
+            <div class="students-entry-form__form-row">
+                Course Name
+                <div class="students-entry-form__form-row--input-section">
+                    <span class="form-group">
+                        <label for="inputName">Course Name</label>
+                        <input id="inputName" [formControl]="courseNameControl" type="text" class="form-control" placeholder="First Name">
+                    </span>
+                    <span class="form-group">
+                        <label for="inputName">Subjects</label>
+                        <input id="inputName" [formControl]="subjectsControl" type="text" class="form-control" placeholder="First Name">
+                    </span>
+                </div>
+            </div>
+            <div class="students-entry-form__form-row">
+                Birth Date
+                <div class="students-entry-form__form-row--input-section">
+                    <div class="input-group">
+                        <input
+                            [formControl]="dateControl"
+                            class="form-control"
+                            placeholder="YYYY-MM-DD"
+                            ngbDatepicker
+                            [footerTemplate]="footerTemplate"
+                            #d="ngbDatepicker"/>
+                        <button class="" (click)="d.toggle()"></button>
+                    </div>
+                    <div class="align-center">
+                        <span *ngIf="dateControl?.value?.year">
+                            Selected Year :  {{dateControl.value.year}}
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="student-entry-form__form-row">
+                Present Address
+                <div class="student-entry-form__form-row--input-address">
+                    <span class="form-group">
+                        <label>Street Address</label>
+                        <input [formControl]="streetControl" type="text" class="form-control" placeholder="Street Address"/>
+                    </span>
+                    <span class="form-group">
+                        <label>Address 2</label>
+                        <input [formControl]="address2Control" type="text" class="form-control" placeholder="Address 2"/>
+                    </span>
+                    <span class="form-group">
+                        <label>Email Address</label>
+                        <input [formControl]="emailControl" type="text" class="form-control" placeholder="Email"/>
+                    </span>
+                </div>
+                <div class="student-entry-form__form-row--input-section">
+                    <span class="form-group">
+                        <label>State</label>
+                        <div class="field-label">{{stateControl.value}}</div>
+                    </span>
+                    <span class="form-group">
+                        <label>City</label>
+                        <input class="form-control" [formControl]="cityControl" type="text"/>
+                    </span>
+                </div>
+                <div class="student-entry-form__form-row--input-section">
+                    <span class="form-group">
+                        <label>Postal Code</label>
+                        <input class="form-control" [formControl]="zipControl"/>
+                    </span>
+                    <span class="form-group">
+                        <label>Country</label>
+                        <div class="field-label">{{countryControl.value}}</div>
+                    </span>
+                </div>
+            </div>
+            <ng-template #footerTemplate>
+                <hr class="my-0"/>
+                <button class="btn btn-primary btn-sm m-2 float-start" (click)="model = today; d.close;">Today</button>
+                <button class="btn btn-primary btn-sm m-2 float-start" (click)="d.close">Today</button>
+            </ng-template>
+        </form>
+    </ng-template>
+
+    <ag-grid-angular
+        class="ag-theme-alpine records-grid"
+        (gridReady)="onGrindReady($event)"
+        [columnDefs]="columnDefs"
+        [rowData]="apiResponse"
+        style="height: 800px; width: 100%;">
+    </ag-grid-angular>
+</div>
+
+<div class="add-btn-container">
+    <button class="add-btn-container__action-button btn btn-success" (click)="open(studentsForm)"> Add Students</button>
+    <button class="add-btn-container__action-button btn btn-light">View Students</button>
+    <button class="add-btn-container__action-button btn btn-dager">Delete Students</button>
+    <button class="add-btn-container__action-button btn btn-info">Clear Selection</button>
+</div>

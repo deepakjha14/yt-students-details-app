@@ -1,0 +1,63 @@
+<div class="students-record">
+	<form>
+		<div class="mb-3 row">
+			<label>Search text</label>
+			<div class="col-xs-3 col-sm-auto">
+				<input class="form-control" type="text" [formControl]="filter"/>
+			</div>
+		</div>
+	</form>
+	<table class="table table-striped students-record__record-table">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>Name</th>
+				<th>Country</th>
+				<th>Physics</th>
+				<th>Chemistry</th>
+				<th>Maths</th>
+				<th>Computer</th>
+			</tr>
+		</thead>
+		<tbody>
+			@for (student of students; track student.name; let i = $index ) {
+				<tr>
+					<th>{{i+1}}</th>
+					<td>
+						<!-- {{student.name}} -->
+						<ngb-highlight [result]="student.name" [term]="filter.value"></ngb-highlight>
+					</td>
+					<td>
+						<img
+							[src]=student.studentImage
+							class="me-2"
+							style="width: 20px;"
+						/>
+						<ngb-highlight [result]="student.country" [term]="filter.value"></ngb-highlight>
+						<!-- {{student.country}} -->
+					</td>
+					<td>
+						<!-- {{student.physics}} -->
+						<ngb-highlight [result]="student.physics" [term]="filter.value"></ngb-highlight>
+					</td>
+					<td>
+						<!-- {{student.chemistry}} -->
+						<ngb-highlight [result]="student.chemistry" [term]="filter.value"></ngb-highlight>
+					</td>
+					<td>
+						<!-- {{student.maths}} -->
+						<ngb-highlight [result]="student.maths" [term]="filter.value"></ngb-highlight>
+					</td>
+					<td>
+						<!-- {{student.computer}} -->
+						<ngb-highlight [result]="student.computer" [term]="filter.value"></ngb-highlight>
+					</td>
+				</tr>
+			} @empty {
+				<tr>
+					<p>No records to show</p>
+				</tr>
+			}
+		</tbody>
+	</table>
+</div>

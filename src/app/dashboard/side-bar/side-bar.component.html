@@ -1,0 +1,36 @@
+<div class="sidebar" [ngClass]="{ 'expanded': isExpanded }">
+    <div class="header">
+		<h1 class="title">
+			Bootstrap App
+		</h1>
+		<div class="toggle" (click)="handleSidebarToggle()">
+			<span class="chevron"></span>
+		</div>
+    </div>
+    <div class="content">
+		<div class="link">
+			<div class="content" [routerLink]="['/dashboard/landing']" [routerLinkActive]="'active'">
+				<div class="icon">
+                    <i class="bi bi-house"></i>
+				</div>
+				<div class="title">Home</div>
+			</div>
+      	</div>
+		<div class="link">
+			<div class="content" [routerLink]="['/dashboard/students']" [routerLinkActive]="'active'">
+				<div class="icon">
+                    <i class="bi bi-list-ol"></i>
+				</div>
+				<div class="title">Students</div>
+			</div>
+		</div>
+		<div class="link with-children">
+			<div class="content">
+				<div class="icon">
+                    <i class="bi bi-gear"></i>
+				</div>
+				<div class="title">Subjects</div>
+			</div>
+		</div>
+	</div>
+  </div>
