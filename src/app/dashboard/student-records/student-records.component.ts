@@ -168,7 +168,7 @@ export class StudentRecordsComponent {
 			address2: this.fb.control("", [ Validators.required ]),
 			email: this.fb.control("", [ Validators.required ]),
 			zip: this.fb.control("", [ Validators.required ])
-		})
+		});
 
 	}
 
@@ -177,6 +177,9 @@ export class StudentRecordsComponent {
 		this.modalService.open(content).result.then(
 			(result) => {
 				// Closing
+				const newRecord = this.studentDetailsForm.value;
+				this.apiResponse.push({...newRecord});
+				this.apiResponse = JSON.parse(JSON.stringify(this.apiResponse));
 			},
 			(reason) => {
 				// Dismiss
