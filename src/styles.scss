@@ -5,5 +5,8 @@
 
 /* Core Grid CSS */
 @import 'ag-grid-community/styles/ag-grid.css';
-/* Quartz Theme Specific CSS */
-@import 'ag-grid-community/styles/ag-theme-quartz.css';
+@import 'ag-grid-community/styles/ag-theme-alpine.css';
+
+.modal-content {
+    min-width: 680px!important;
+}

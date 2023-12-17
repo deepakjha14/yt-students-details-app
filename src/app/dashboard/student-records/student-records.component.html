@@ -1,18 +1,18 @@
- <div class="students-entry">
+ <div class="student-entry">
     <ng-template #studentsForm let-modal>
-        <form class="students-entry-form">
-            <div class="students-entry-form__form-row">
+        <form class="student-entry-form">
+            <div class="student-entry-form__form-row">
                 Full Name
-                <div class="students-entry-form__form-row--input-section">
+                <div class="student-entry-form__form-row--input-section">
                     <span class="form-group">
                         <label for="inputName">Name</label>
                         <input id="inputName" [formControl]="nameControl" type="text" class="form-control" placeholder="First Name">
                     </span>
                 </div>
             </div>
-            <div class="students-entry-form__form-row">
+            <div class="student-entry-form__form-row">
                 Origin
-                <div class="students-entry-form__form-row--input-section">
+                <div class="student-entry-form__form-row--input-section">
                     <span class="form-group">
                         <label for="inputName">Country</label>
                         <input id="inputName" [formControl]="countryControl" type="text" class="form-control" placeholder="First Name">
@@ -23,9 +23,9 @@
                     </span>
                 </div>
             </div>
-            <div class="students-entry-form__form-row">
+            <div class="student-entry-form__form-row">
                 Declaration
-                <div class="students-entry-form__form-row--input-section">
+                <div class="student-entry-form__form-row--input-section">
                     <span class="form-group">
                         <label for="inputName">Passport Declaration</label>
                         <input id="inputName" [formControl]="passportDeclarationControl" type="text" class="form-control" placeholder="First Name">
@@ -36,9 +36,9 @@
                     </span>
                 </div>
             </div>
-            <div class="students-entry-form__form-row">
+            <div class="student-entry-form__form-row">
                 Course Name
-                <div class="students-entry-form__form-row--input-section">
+                <div class="student-entry-form__form-row--input-section">
                     <span class="form-group">
                         <label for="inputName">Course Name</label>
                         <input id="inputName" [formControl]="courseNameControl" type="text" class="form-control" placeholder="First Name">
@@ -49,9 +49,9 @@
                     </span>
                 </div>
             </div>
-            <div class="students-entry-form__form-row">
+            <div class="student-entry-form__form-row">
                 Birth Date
-                <div class="students-entry-form__form-row--input-section">
+                <div class="student-entry-form__form-row--input-section">
                     <div class="input-group">
                         <input
                             [formControl]="dateControl"
@@ -60,7 +60,7 @@
                             ngbDatepicker
                             [footerTemplate]="footerTemplate"
                             #d="ngbDatepicker"/>
-                        <button class="" (click)="d.toggle()"></button>
+                        <button class="btn btn-outline-secondary bi bi-calendar3" (click)="d.toggle()"></button>
                     </div>
                     <div class="align-center">
                         <span *ngIf="dateControl?.value?.year">
@@ -105,11 +105,15 @@
                         <div class="field-label">{{countryControl.value}}</div>
                     </span>
                 </div>
+                <div class="student-entry-form__form-row--input-buttons">
+                    <button type="submit" class="btn btn-primary" (click)="modal.close()" [disabled]="studentDetailsForm.status === 'INVALID'">Submit</button>
+                    <button type="submit" class="btn btn-light" (click)="modal.dismiss()">Cancel</button>
+                </div>
             </div>
             <ng-template #footerTemplate>
                 <hr class="my-0"/>
                 <button class="btn btn-primary btn-sm m-2 float-start" (click)="model = today; d.close;">Today</button>
-                <button class="btn btn-primary btn-sm m-2 float-start" (click)="d.close">Today</button>
+                <button class="btn btn-secondary btn-sm m-2 float-start" (click)="d.close">Close</button>
             </ng-template>
         </form>
     </ng-template>
@@ -118,14 +122,35 @@
         class="ag-theme-alpine records-grid"
         (gridReady)="onGrindReady($event)"
         [columnDefs]="columnDefs"
+        [rowSelection]="'single'"
         [rowData]="apiResponse"
         style="height: 800px; width: 100%;">
     </ag-grid-angular>
 </div>
 
+<ng-template #confirmDeleteModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-title">Profile Deletion</h4>
+        <button type="button" class="btn-close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <p>
+            <strong>Are you sure you want to delete <span class="text-rpimary">{{selectedRecord.name}}</span> profile?</strong>
+        </p>
+        <p>
+            All the information about this used will be deleted from the application
+            <span class="text-dager">This operation can not be undone.</span>
+        </p>
+        <div class="modal-footer">
+            <button class="btn-outliner-secondary btn" (click)="modal.dismiss('Close button clicked')">Cancel</button>
+            <button class="btn btn-danger" (click)="modal.close('Ok click')">Ok</button>
+        </div>
+    </div>
+</ng-template>
+
 <div class="add-btn-container">
     <button class="add-btn-container__action-button btn btn-success" (click)="open(studentsForm)"> Add Students</button>
-    <button class="add-btn-container__action-button btn btn-light">View Students</button>
-    <button class="add-btn-container__action-button btn btn-dager">Delete Students</button>
-    <button class="add-btn-container__action-button btn btn-info">Clear Selection</button>
+    <button class="add-btn-container__action-button btn btn-light" [disabled]="!checkIfSelected()" (click)="onOpenViewForm(studentsForm)">View Students</button>
+    <button class="add-btn-container__action-button btn btn-danger" [disabled]="!checkIfSelected()" (click)="onDeletedRecord(confirmDeleteModal)">Delete Students</button>
+    <button class="add-btn-container__action-button btn btn-info" [disabled]="!checkIfSelected()"(click)="clearSelection()">Clear Selection</button>
 </div>

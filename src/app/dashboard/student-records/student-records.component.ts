@@ -88,6 +88,8 @@ export class StudentRecordsComponent {
 	studentDetailsForm: FormGroup;
 	model!: NgbDateStruct;
 	today = this.calendar.getToday();
+	closeResult: any;
+	selectedRecord: any;
 
 	columnDefs: ColDef[] = [
 		{ field: "name"},
@@ -171,6 +173,7 @@ export class StudentRecordsComponent {
 	}
 
 	open(content: any) {
+		this.studentDetailsForm.reset();
 		this.modalService.open(content).result.then(
 			(result) => {
 				// Closing
@@ -183,5 +186,62 @@ export class StudentRecordsComponent {
 
 	onGrindReady(params: any) {
 		this.gridApi = params?.api;
+	}
+
+	onOpenViewForm(studentsForm: any) {
+		const selectedRow = this.gridApi?.getSelectedRows()[0];
+		this.studentDetailsForm.patchValue(selectedRow);
+		this.studentDetailsForm.disable();
+		this.modalService.open(studentsForm).result.then(
+			(result) => {
+				this.studentDetailsForm.enable();
+			},
+			(reason) => {
+				this.closeResult = `Dismissed ${this.getDismissReason({reason})}`;
+				this.studentDetailsForm.enable();
+			}
+		);
+	}
+
+	private getDismissReason(reason: any): string {
+		if (reason === ModalDismissReasons.ESC) {
+			return 'Reason was escape press';
+		} else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+			return 'Backdrop was clicked';
+		} else {
+			return `with: ${reason}`;
+		}
+	}
+
+	onDeletedRecord(deleteTemplate: any) {
+		const selectedRecord = this.gridApi.getSelectedRows()[0];
+		this.selectedRecord = selectedRecord;
+		let newResponse: any = [];
+		this.modalService.open(deleteTemplate).result.then(
+			(result) => {
+				this.closeResult = `Closed with: ${this.getDismissReason({result})}`;
+
+				this.apiResponse.forEach(
+					(rec: any) => {
+						if (rec.name !== selectedRecord.name) {
+							newResponse.push(rec);
+						}	
+					}
+				);
+
+				this.apiResponse = [...newResponse];
+			},
+			(reason) => {
+				this.closeResult = `Dismissed ${this.getDismissReason({reason})}`;
+			}
+		);
+	}
+
+	clearSelection(): void {
+		this.gridApi.deselectAll();
+	}
+
+	checkIfSelected(): boolean {
+		return this.gridApi?.getSelectedRows()?.length>0;
 	}
 }
