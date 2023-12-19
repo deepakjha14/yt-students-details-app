@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, WritableSignal, computed, signal, Signal } from '@angular/core';
 import { FormControl, FormBuilder, FormGroup, Validator, Validators } from "@angular/forms";
 
 import { ModalDismissReasons, NgbModal, NgbDateStruct, NgbCalendar, NgbModalConfig } from "@ng-bootstrap/ng-bootstrap";
@@ -91,6 +91,17 @@ export class StudentRecordsComponent implements OnInit {
 	today = this.calendar.getToday();
 	closeResult: any;
 	selectedRecord: any;
+	// Writable
+	studentsRecordsCount: WritableSignal<number> = signal(0);
+
+	// Computed
+	studentsWarning: Signal<string> = computed(()=>{
+		if (this.studentsRecordsCount() < 26) {
+			return 'Students count is too low';
+		} else {
+			return 'Students count is sufficient';
+		}
+	});
 
 	columnDefs: ColDef[] = [
 		{ field: "name"},
@@ -179,6 +190,7 @@ export class StudentRecordsComponent implements OnInit {
 			(res: any) => {
 				console.log("Api response in students record component", res);
 				this.apiResponse = res;
+				this.studentsRecordsCount.set(this.apiResponse.length);
 			}
 		);
 	}
@@ -191,6 +203,7 @@ export class StudentRecordsComponent implements OnInit {
 				const newRecord = this.studentDetailsForm.value;
 				this.apiResponse.push({...newRecord});
 				this.apiResponse = JSON.parse(JSON.stringify(this.apiResponse));
+				this.studentsRecordsCount.set(this.apiResponse.length);
 			},
 			(reason) => {
 				// Dismiss
@@ -244,6 +257,7 @@ export class StudentRecordsComponent implements OnInit {
 				);
 
 				this.apiResponse = [...newResponse];
+				this.studentsRecordsCount.set(this.apiResponse.length);
 			},
 			(reason) => {
 				this.closeResult = `Dismissed ${this.getDismissReason({reason})}`;
