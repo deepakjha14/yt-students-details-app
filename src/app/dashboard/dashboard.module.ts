@@ -9,6 +9,8 @@ import { SideBarComponent } from "./side-bar/side-bar.component";
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { StudentRecordsComponent } from './student-records/student-records.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DashboardService } from './dashboard.service';
+import { HttpClientModule } from '@angular/common/http';
 
 const routes: Routes = [
 	{
@@ -42,6 +44,7 @@ const routes: Routes = [
 	imports: [
 		CommonModule,
 		RouterModule,
+		HttpClientModule,
 		NgbHighlight,
 		NgbDatepickerModule,
 		NgbTypeaheadModule,
@@ -51,6 +54,9 @@ const routes: Routes = [
 		RouterModule.forChild(
 			routes
 		)
+	],
+	providers: [
+		DashboardService
 	]
 })
 export class DashboardModule { }

@@ -1,0 +1,179 @@
+{
+  "uuid": "4a8d10b3-5c14-4ed3-acf7-2038d937fc83",
+  "lastMigration": 32,
+  "name": "Students details",
+  "endpointPrefix": "",
+  "latency": 0,
+  "port": 3002,
+  "hostname": "",
+  "folders": [],
+  "routes": [
+    {
+      "uuid": "75cf6c3e-b896-4317-ba7b-fb4bc4291024",
+      "type": "http",
+      "documentation": "students",
+      "method": "get",
+      "endpoint": "api/students",
+      "responses": [
+        {
+          "uuid": "0d7911ef-b469-46b9-9bf8-9101c6963cb7",
+          "body": "[\n  {{#repeat 20}}\n    {\n      \"name\": \"{{faker 'person.fullName'}}\",\n      \"city\": \"{{faker 'location.city'}}\",\n      \"studentImage\": \"{{faker 'image.avatar'}}\",\n      \"state\": \"{{faker 'location.stateAbbr'}}\",\n      \"country\": \"{{faker 'location.country'}}\",\n      \"physics\": {{faker 'number.int' min=0 max=25 max=99999}},\n      \"chemistry\": {{faker 'number.int' min=0 max=25 max=99999}},\n      \"maths\": {{faker 'number.int' min=0 max=25 max=99999}},\n      \"computer\": {{faker 'number.int' min=0 max=25 max=99999}}\n    }\n    {{#unless @last}},{{/unless}}\n  {{/repeat}}\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "f6d981f2-b2bb-4ae4-8b25-d554389bd071",
+      "type": "http",
+      "documentation": "addresses",
+      "method": "get",
+      "endpoint": "api/addresses",
+      "responses": [
+        {
+          "uuid": "70faf188-ffbd-43f4-844a-c10b6fe54a0f",
+          "body": "[\n  {{#repeat 10}}\n    {\n      \"id\": {{faker 'number.int' max=99999}},\n      \"street\": \"{{faker 'location.streetAddress'}}\",\n      \"city\": \"{{faker 'location.city'}}\",\n      \"state\": \"{{faker 'location.stateAbbr'}}\",\n      \"zip\": {{faker 'location.zipCode'}},\n      \"country\": \"{{faker 'location.country'}}\",\n      \"latitude\": {{faker 'location.latitude'}},\n      \"longitude\": {{faker 'location.longitude'}},\n      \"phone\": \"{{faker 'phone.number'}}\",\n      \"email\": \"{{faker 'internet.email'}}\",\n      \"website\": \"{{faker 'internet.url'}}\"\n    }\n    {{#unless @last}},{{/unless}}\n  {{/repeat}}\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "6f9e3499-f010-4c0b-8937-8e8339b8a4ed",
+      "type": "http",
+      "documentation": "studentsMarks",
+      "method": "get",
+      "endpoint": "api/studentsMarks",
+      "responses": [
+        {
+          "uuid": "5275531b-b8ab-4ace-9c3f-c432d3fe4544",
+          "body": "[\n  {{#repeat 5}}\n    {\n      \"id\": \"{{faker 'number.int' max=99999}}\",\n      \"name\": \"{{faker 'person.firstName'}} {{faker 'person.lastName'}}\",\n      \"physics\": \"{{faker 'number.int' min=0 max=25 max=99999}}\",\n      \"maths\": \"{{faker 'number.int' min=0 max=25 max=99999}}\"\n    }\n  {{/repeat}},\n  {{#repeat 5}}\n    {\n      \"id\": \"{{faker 'number.int' max=99999}}\",\n      \"name\": \"{{faker 'person.firstName'}} {{faker 'person.lastName'}}\",\n      \"computer\": \"{{faker 'number.int' min=0 max=25 max=99999}}\",\n      \"chemistry\": \"{{faker 'number.int' min=0 max=25 max=99999}}\"\n    }\n  {{/repeat}},\n  {{#repeat 5}}\n    {\n      \"id\": \"{{faker 'number.int' max=99999}}\",\n      \"name\": \"{{faker 'person.firstName'}} {{faker 'person.lastName'}}\",\n      \"computers\": \"{{faker 'number.int' min=0 max=25 max=99999}}\",\n      \"chemistry\": \"{{faker 'number.int' min=0 max=25 max=99999}}\"\n    }\n  {{/repeat}}\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "eb132638-4364-46f4-abb5-3e6130881cdf",
+      "type": "http",
+      "documentation": "students details",
+      "method": "get",
+      "endpoint": "api/studentsDetails",
+      "responses": [
+        {
+          "uuid": "fccb37dd-ecc2-4bbd-9912-05e7018cb247",
+          "body": "[\n  {{#repeat 4}}\n    {\n      \"name\": \"{{faker 'person.fullName'}}\",\n      \"country\": \"{{faker 'location.country'}}\",\n      \"state\": \"{{faker 'location.stateAbbr'}}\",\n      \"passportDeclaration\": \"{{faker 'datatype.boolean'}}\",\n      \"fitnessDeclaration\": \"{{faker 'datatype.boolean'}}\",\n      \"courseName\": \"BSc\",\n      \"subjects\": \"Maths\",\n      \"date\":\"{{faker 'date.birthdate' min=17 max=65 }}\",\n      \"city\": \"{{faker 'location.city'}}\",\n      \"studentImage\": \"{{faker 'image.avatar'}}\",\n      \"street\": \"{{faker 'location.streetAddress'}}\",\n      \"address2\": \"{{faker 'location.secondaryAddress'}}\",\n      \"zip\": \"{{faker 'location.zipCode'}}\",\n      \"phone\": \"{{faker 'phone.number'}}\",\n      \"email\": \"{{faker 'internet.email'}}\",\n      \"website\": \"{{faker 'internet.url'}}\"\n    }\n  {{/repeat}},\n  {{#repeat 5}}\n    {\n      \"name\": \"{{faker 'person.fullName'}}\",\n      \"country\": \"{{faker 'location.country'}}\",\n      \"state\": \"{{faker 'location.stateAbbr'}}\",\n      \"passportDeclaration\": \"{{faker 'datatype.boolean'}}\",\n      \"fitnessDeclaration\": \"{{faker 'datatype.boolean'}}\",\n      \"courseName\": \"MSc\",\n      \"subjects\": \"Physics\",\n      \"date\":\"{{faker 'date.birthdate' min=17 max=65 }}\",\n      \"city\": \"{{faker 'location.city'}}\",\n      \"studentImage\": \"{{faker 'image.avatar'}}\",\n      \"street\": \"{{faker 'location.streetAddress'}}\",\n      \"address2\": \"{{faker 'location.secondaryAddress'}}\",\n      \"city\": \"{{faker 'location.city'}}\",\n      \"state\": \"{{faker 'location.stateAbbr'}}\",\n      \"zip\": \"{{faker 'location.zipCode'}}\",\n      \"country\": \"{{faker 'location.country'}}\",\n      \"phone\": \"{{faker 'phone.number'}}\",\n      \"email\": \"{{faker 'internet.email'}}\",\n      \"website\": \"{{faker 'internet.url'}}\"\n    }\n  {{/repeat}},\n  {{#repeat 8}}\n    {\n      \"name\": \"{{faker 'person.fullName'}}\",\n      \"country\": \"{{faker 'location.country'}}\",\n      \"state\": \"{{faker 'location.stateAbbr'}}\",\n      \"passportDeclaration\": \"{{faker 'datatype.boolean'}}\",\n      \"fitnessDeclaration\": \"{{faker 'datatype.boolean'}}\",\n      \"courseName\": \"BSc\",\n      \"subjects\": \"Chemistry\",\n      \"date\":\"{{faker 'date.birthdate' min=17 max=65 }}\",\n      \"city\": \"{{faker 'location.city'}}\",\n      \"studentImage\": \"{{faker 'image.avatar'}}\",\n      \"street\": \"{{faker 'location.streetAddress'}}\",\n      \"address2\": \"{{faker 'location.secondaryAddress'}}\",\n      \"city\": \"{{faker 'location.city'}}\",\n      \"state\": \"{{faker 'location.stateAbbr'}}\",\n      \"zip\": \"{{faker 'location.zipCode'}}\",\n      \"country\": \"{{faker 'location.country'}}\",\n      \"phone\": \"{{faker 'phone.number'}}\",\n      \"email\": \"{{faker 'internet.email'}}\",\n      \"website\": \"{{faker 'internet.url'}}\"\n    }\n  {{/repeat}},\n  {{#repeat 5}}\n    {\n      \"name\": \"{{faker 'person.fullName'}}\",\n      \"country\": \"{{faker 'location.country'}}\",\n      \"state\": \"{{faker 'location.stateAbbr'}}\",\n      \"passportDeclaration\": \"{{faker 'datatype.boolean'}}\",\n      \"fitnessDeclaration\": \"{{faker 'datatype.boolean'}}\",\n      \"courseName\": \"BSc\",\n      \"subjects\": \"Physics\",\n      \"date\":\"{{faker 'date.birthdate' min=17 max=65 }}\",\n      \"city\": \"{{faker 'location.city'}}\",\n      \"studentImage\": \"{{faker 'image.avatar'}}\",\n      \"street\": \"{{faker 'location.streetAddress'}}\",\n      \"address2\": \"{{faker 'location.secondaryAddress'}}\",\n      \"city\": \"{{faker 'location.city'}}\",\n      \"state\": \"{{faker 'location.stateAbbr'}}\",\n      \"zip\": \"{{faker 'location.zipCode'}}\",\n      \"country\": \"{{faker 'location.country'}}\",\n      \"phone\": \"{{faker 'phone.number'}}\",\n      \"email\": \"{{faker 'internet.email'}}\",\n      \"website\": \"{{faker 'internet.url'}}\"\n    }\n  {{/repeat}},\n  {{#repeat 5}}\n    {\n      \"name\": \"{{faker 'person.fullName'}}\",\n      \"country\": \"{{faker 'location.country'}}\",\n      \"state\": \"{{faker 'location.stateAbbr'}}\",\n      \"passportDeclaration\": \"{{faker 'datatype.boolean'}}\",\n      \"fitnessDeclaration\": \"{{faker 'datatype.boolean'}}\",\n      \"courseName\": \"MSc\",\n      \"subjects\": \"Computer Science\",\n      \"date\":\"{{faker 'date.birthdate' min=17 max=65 }}\",\n      \"city\": \"{{faker 'location.city'}}\",\n      \"studentImage\": \"{{faker 'image.avatar'}}\",\n      \"street\": \"{{faker 'location.streetAddress'}}\",\n      \"address2\": \"{{faker 'location.secondaryAddress'}}\",\n      \"city\": \"{{faker 'location.city'}}\",\n      \"state\": \"{{faker 'location.stateAbbr'}}\",\n      \"zip\": \"{{faker 'location.zipCode'}}\",\n      \"country\": \"{{faker 'location.country'}}\",\n      \"phone\": \"{{faker 'phone.number'}}\",\n      \"email\": \"{{faker 'internet.email'}}\",\n      \"website\": \"{{faker 'internet.url'}}\"\n    }\n  {{/repeat}}\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    }
+  ],
+  "rootChildren": [
+    {
+      "type": "route",
+      "uuid": "75cf6c3e-b896-4317-ba7b-fb4bc4291024"
+    },
+    {
+      "type": "route",
+      "uuid": "f6d981f2-b2bb-4ae4-8b25-d554389bd071"
+    },
+    {
+      "type": "route",
+      "uuid": "6f9e3499-f010-4c0b-8937-8e8339b8a4ed"
+    },
+    {
+      "type": "route",
+      "uuid": "eb132638-4364-46f4-abb5-3e6130881cdf"
+    }
+  ],
+  "proxyMode": false,
+  "proxyHost": "",
+  "proxyRemovePrefix": false,
+  "tlsOptions": {
+    "enabled": false,
+    "type": "CERT",
+    "pfxPath": "",
+    "certPath": "",
+    "keyPath": "",
+    "caPath": "",
+    "passphrase": ""
+  },
+  "cors": true,
+  "headers": [
+    {
+      "key": "Content-Type",
+      "value": "application/json"
+    }
+  ],
+  "proxyReqHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "proxyResHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "data": [],
+  "callbacks": []
+}

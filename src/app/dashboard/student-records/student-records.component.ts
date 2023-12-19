@@ -1,15 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormBuilder, FormGroup, Validator, Validators } from "@angular/forms";
 
 import { ModalDismissReasons, NgbModal, NgbDateStruct, NgbCalendar, NgbModalConfig } from "@ng-bootstrap/ng-bootstrap";
 import { ColDef, GridApi } from "ag-grid-community";
+import { DashboardService } from '../dashboard.service';
 
 @Component({
   selector: 'students-details-student-records',
   templateUrl: './student-records.component.html',
   styleUrl: './student-records.component.scss'
 })
-export class StudentRecordsComponent {
+export class StudentRecordsComponent implements OnInit {
 	gridApi: any;
 	apiResponse: any = [
 		{
@@ -152,7 +153,8 @@ export class StudentRecordsComponent {
 	constructor( 
 		private fb: FormBuilder,
 		private modalService: NgbModal,
-		private calendar: NgbCalendar
+		private calendar: NgbCalendar,
+		private dashboardService: DashboardService
 	) {
 		this.studentDetailsForm = this.fb.group({
 			name: this.fb.control("", [ Validators.required ]),
@@ -170,6 +172,15 @@ export class StudentRecordsComponent {
 			zip: this.fb.control("", [ Validators.required ])
 		});
 
+	}
+
+	ngOnInit(): void {
+		this.dashboardService.callGetStudentsDetailsRecords().subscribe(
+			(res: any) => {
+				console.log("Api response in students record component", res);
+				this.apiResponse = res;
+			}
+		);
 	}
 
 	open(content: any) {

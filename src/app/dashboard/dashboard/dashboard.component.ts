@@ -8,6 +8,5 @@ import { Component } from '@angular/core';
 export class DashboardComponent {
 	sidebarExpanded: boolean = true;
     constructor(
-    ) {
-    }
+    ) {}
 }
