@@ -1,0 +1,18 @@
+<div class="marks-container">
+    <div class="subjects">
+        <button class="btn btn-primary" (click)="onClick(chemistryList)">Chemistry</button>
+        <button class="btn btn-primary" (click)="onClick(mathsList)">Maths</button>
+        <button class="btn btn-primary" (click)="onClick(computerList)">Computers</button>
+        <button class="btn btn-primary" (click)="onClick(physicsList)">Physics</button>
+    </div>
+
+    Font Size: {{fontSize}}
+    <div class="style-btn">
+        <button class="btn btn-info style-action" (click)="onIncrease()">+</button>
+        <button class="btn btn-info style-action" (click)="onReduce()">-</button>
+    </div>
+</div>
+
+<hr class="border"/>
+
+<students-details-subjects-details [records]="selectedRecords" [(size)]="fontSize"></students-details-subjects-details>

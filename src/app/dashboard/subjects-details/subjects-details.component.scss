@@ -1,0 +1,41 @@
+.card-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 16px;
+    width: 100%;
+    justify-content: center;
+    margin-top: 16px;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.display-card {
+    max-width: 300px;
+
+    &__name {
+        border-bottom: 1px solid #f0f0f0;
+        color: #665687;
+        margin: 16px;
+    }
+    
+    &__marks {
+        display: flex;
+        flex-direction: column;
+        margin: 24px;
+    }
+}
+
+.style-action {
+    border-radius: 10%;
+}
+
+.style-btn {
+    display: flex;
+    flex-direction: row;
+    margin-left: auto;
+    gap: 8px;
+    justify-content: center;
+}

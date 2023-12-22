@@ -1,16 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from "@angular/router";
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { NgbHighlight, NgbDatepickerModule, NgbTypeaheadModule } from "@ng-bootstrap/ng-bootstrap";
 import { AgGridModule } from "ag-grid-angular";
+
 import { LandingComponent } from "./landing/landing.component";
 import { SideBarComponent } from "./side-bar/side-bar.component";
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { StudentRecordsComponent } from './student-records/student-records.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DashboardService } from './dashboard.service';
-import { HttpClientModule } from '@angular/common/http';
+import { StudentsMarksComponent } from "./students-marks/students-marks.component";
 
 const routes: Routes = [
 	{
@@ -29,6 +31,10 @@ const routes: Routes = [
 			{
 				path: "students",
 				component: StudentRecordsComponent
+			},
+			{
+				path: "students-marks",
+				component: StudentsMarksComponent
 			}
 		]
 	},

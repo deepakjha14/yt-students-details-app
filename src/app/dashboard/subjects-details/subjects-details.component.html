@@ -1,0 +1,33 @@
+<div class="style-btn">
+    <button class="btn btn-info style-action" (click)="onIncrease()">+</button>
+    <button class="btn btn-info style-action" (click)="onReduce()">-</button>
+</div>
+<div *ngIf="records?.length>0 else noShowTemplate;" class="card-container">
+    <div *ngFor="let rec of records" class="card display-card">
+        <div class="display-card__name">
+            <h4 [style.font-size.px]="size">
+                {{rec.name}}
+            </h4>
+        </div>
+        <div class="display-card__marks">
+            <span *ngIf="rec?.computer">
+                Computer - {{rec.computer}}
+            </span>
+            <span *ngIf="rec?.physics">
+                Physics - {{rec.physics}}
+            </span>
+            <span *ngIf="rec?.chemistry">
+                Chemistry - {{rec.chemistry}}
+            </span>
+            <span *ngIf="rec?.maths">
+                Maths - {{rec.maths}}
+            </span>
+        </div>
+    </div>
+</div>
+
+<ng-template #noShowTemplate>
+    <div>
+        Please select any subject to see the detils.
+    </div>
+</ng-template>

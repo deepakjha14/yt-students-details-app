@@ -24,4 +24,8 @@ export class DashboardService {
     callGetStudentsAddressRecords(): Observable<any> {
         return this.http.get("/api/addresses");
     }
+
+    callStudetnsMarks(): Observable<any> {
+        return this.http.get("/api/studentsMarks");
+    }
 }

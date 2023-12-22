@@ -1,0 +1,24 @@
+.marks-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    padding: 16px;
+}
+
+.subjects {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+}
+
+.style-btn {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+}
+
+.style-action {
+    border-radius: 50%;
+    background-color: #f0f0f0;
+}
