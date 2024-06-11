@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from "@angular/router";
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { NgbHighlight, NgbDatepickerModule, NgbTypeaheadModule } from "@ng-bootstrap/ng-bootstrap";
@@ -40,29 +40,21 @@ const routes: Routes = [
 	},
 ];
 
-@NgModule({
-	declarations: [
-		DashboardComponent,
-		LandingComponent,
-		SideBarComponent,
-		StudentRecordsComponent
-	],
-	imports: [
-		CommonModule,
-		RouterModule,
-		HttpClientModule,
-		NgbHighlight,
-		NgbDatepickerModule,
-		NgbTypeaheadModule,
-		AgGridModule,
-		FormsModule,
-		ReactiveFormsModule,
-		RouterModule.forChild(
-			routes
-		)
-	],
-	providers: [
-		DashboardService
-	]
-})
+@NgModule({ declarations: [
+        DashboardComponent,
+        LandingComponent,
+        SideBarComponent,
+        StudentRecordsComponent
+    ], imports: [CommonModule,
+        RouterModule,
+        NgbHighlight,
+        NgbDatepickerModule,
+        NgbTypeaheadModule,
+        AgGridModule,
+        FormsModule,
+        ReactiveFormsModule,
+        RouterModule.forChild(routes)], providers: [
+        DashboardService,
+        provideHttpClient(withInterceptorsFromDi())
+    ] })
 export class DashboardModule { }
