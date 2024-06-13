@@ -1,6 +1,5 @@
-import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
-import { FormsModule, ReactiveFormsModule, FormControl, FormBuilder } from '@angular/forms';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { FormControl, FormBuilder } from '@angular/forms';
 import { DashboardService } from '../dashboard.service';
 
 @Component({
@@ -14,7 +13,8 @@ export class LandingComponent implements OnInit {
 	
 	constructor(
 		private fb: FormBuilder,
-		private dashboardServic: DashboardService
+		private dashboardServic: DashboardService,
+		private cdr: ChangeDetectorRef
 	) {
         this.filter = this.fb.control("", { nonNullable: true });
 	}
@@ -23,6 +23,7 @@ export class LandingComponent implements OnInit {
 		this.dashboardServic.callGetStudentsRecords().subscribe(
 			(res: any) => {
 				this.students = res;
+				this.cdr.detectChanges();
 			}
 		);
 	}
