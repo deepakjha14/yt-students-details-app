@@ -1,0 +1,14 @@
+@defer {
+    @for (student of students; track student.id) {
+        <div>
+            <h1>Students List</h1>
+            <li>{{student.name}}</li>
+        </div>
+    } @empty {
+        <li>Nothing to display</li>
+    }
+} @placeholder (minimum 3000ms) { 
+    <div>
+        <h1>Wait until data arrives :) </h1>
+    </div>
+}

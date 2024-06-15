@@ -13,6 +13,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { StudentRecordsComponent } from './student-records/student-records.component';
 import { DashboardService } from './dashboard.service';
 import { StudentsMarksComponent } from "./students-marks/students-marks.component";
+import { StudentsListComponent } from './students-list/students-list.component';
 
 const routes: Routes = [
 	{
@@ -35,6 +36,10 @@ const routes: Routes = [
 			{
 				path: "students-marks",
 				component: StudentsMarksComponent
+			},
+			{
+				path: "students-list",
+				component: StudentsListComponent
 			}
 		]
 	},
