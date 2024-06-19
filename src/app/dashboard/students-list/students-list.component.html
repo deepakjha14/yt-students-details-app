@@ -1,0 +1,16 @@
+
+@for (student of students$ | async; track student.id) {
+        <div class="student">
+            <h1 class="student__name">{{ student.name }}</h1>
+            <div class="student__age">{{ student.country }}</div>
+
+        @defer (on viewport; prefetch on idle) {
+            <img [src]="student.studentImage" height="100" width="100"/>
+        } @placeholder {
+            <div class="student">
+                <h1 class="student__name">Loading...</h1>
+                <div class="student__age">Loading...</div>
+            </div>
+        }
+        </div>
+}
