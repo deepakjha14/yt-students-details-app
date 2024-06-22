@@ -2,32 +2,46 @@
     <button class="btn btn-info style-action" (click)="onIncrease()">+</button>
     <button class="btn btn-info style-action" (click)="onReduce()">-</button>
 </div>
-<div *ngIf="records?.length>0 else noShowTemplate;" class="card-container">
-    <div *ngFor="let rec of records" class="card display-card">
-        <div class="display-card__name">
-            <h4 [style.font-size.px]="size">
-                {{rec.name}}
-            </h4>
-        </div>
-        <div class="display-card__marks">
-            <span *ngIf="rec?.computer">
-                Computer - {{rec.computer}}
-            </span>
-            <span *ngIf="rec?.physics">
-                Physics - {{rec.physics}}
-            </span>
-            <span *ngIf="rec?.chemistry">
-                Chemistry - {{rec.chemistry}}
-            </span>
-            <span *ngIf="rec?.maths">
-                Maths - {{rec.maths}}
-            </span>
-        </div>
+@if (records?.length>0) {
+    <div class="card-container">
+        @for(rec of records; track rec.name) {
+            <div class="card display-card">
+                <div class="display-card__name">
+                    <h4 [style.font-size.px]="size">
+                        {{rec.name}}
+                    </h4>
+                </div>
+                <div class="display-card__marks">
+                    @if (rec?.computer) {
+                        <span>
+                            Computer - {{rec.computer}}
+                        </span>
+                    }
+                    @if (rec?.physics) {
+                        <span>
+                            Physics - {{rec.physics}}
+                        </span>
+                    }
+                    @if (rec?.chemistry) {
+                        <span>
+                            Chemistry - {{rec.chemistry}}
+                        </span>
+                    }
+                    @if (rec?.maths) {
+                        <span>
+                            Maths - {{rec.maths}}
+                        </span>
+                    }
+                </div>
+            </div>
+        } @empty {
+            <div>
+                No records found.
+            </div>
+        }
     </div>
-</div>
-
-<ng-template #noShowTemplate>
+} @else {
     <div>
         Please select any subject to see the detils.
     </div>
-</ng-template>
+}

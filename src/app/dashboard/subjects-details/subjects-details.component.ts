@@ -12,6 +12,7 @@ export class SubjectsDetailsComponent {
 	@Input() records!: any;
 	@Input() size: number = 26;
 	@Output() sizeChange = new EventEmitter<number>();
+	testSwitchText: string = 'physics';
 
 	onIncrease(): void {
 		this.resize(+1);
